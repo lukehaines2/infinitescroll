@@ -55,21 +55,18 @@
     // Show Loader on FE
     showLoader();
 
-    // Timeout hack to ensure loader is displayed for own visual benefit
-    setTimeout(async () => {
-      try {
-        if (hasMoreQuotes(page, limit, total)) {
-          // Call API
-          const response = await getQuotes(page, limit);
-          renderQuotes(response.data);
-          total = response.total;
-        }
-      } catch (e) {
-        console.error(e.message);
-      } finally {
-        hideLoader();
+    try {
+      if (hasMoreQuotes(page, limit, total)) {
+        // Call API
+        const response = await getQuotes(page, limit);
+        renderQuotes(response.data);
+        total = response.total;
       }
-    }, 500);
+    } catch (e) {
+      console.error(e.message);
+    } finally {
+      hideLoader();
+    }
   };
 
 
