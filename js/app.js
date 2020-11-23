@@ -71,21 +71,16 @@
 
 
   window.addEventListener('scroll', () => {
-    const {
-      scrollTop,
-      scrollHeight,
-      clientHeight
-    } = document.documentElement;
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-    if (scrollTop + clientHeight >= scrollHeight - 5 &&
-      hasMoreQuotes(currentPage, limit, total)) {
+    if (scrollTop + clientHeight >= scrollHeight - 5 && hasMoreQuotes(currentPage, limit, total)) {
       currentPage++;
       loadQuotes(currentPage, limit);
     }
   }, {
+    // Chromium browser implementation to stop e.preventdefault
     passive: true
   });
-
 
   loadQuotes(currentPage, limit);
 
